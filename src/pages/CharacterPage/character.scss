@@ -1,0 +1,37 @@
+.character {
+    padding: 20px 0;
+}
+
+.character__img {
+    max-width: 200px;
+}
+
+.character__content {
+    display: flex;
+    gap: 15px;
+}
+
+.character__btns-link {
+    border: 1px solid #333;
+    padding: 10px 25px;
+    border-radius: 15px;
+    color: #333;
+}
+
+.character__btns {
+    align-items: flex-end;
+    display: flex;
+    gap: 15px;
+}
+
+.character__info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.character__texts {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}

@@ -1,0 +1,14 @@
+.locations {
+    padding: 20px 0;
+}
+
+.locations__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.locations__item {
+    border: 1px solid #333;
+    padding: 5px;
+}

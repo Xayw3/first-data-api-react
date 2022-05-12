@@ -1,0 +1,18 @@
+.header {
+    padding: 20px 0;
+    box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0,0,0,0);
+}
+
+.menu__list {
+    display: flex;
+    gap: 15px;
+}
+
+.menu__link {
+    font-size: 18px;
+    color: #333;
+}
+
+.menu__link--active {
+    border-bottom: 1px solid #333;
+}
