@@ -53,3 +53,20 @@
     border-color: #fff;
     color: #fff;
 }
+
+.page-btn {
+    width: 25px;
+    height: 25px;
+    border: 1px solid #333;
+    display: block;
+    text-align: center;
+    border-radius: 50%;
+    color: #333;
+}
+
+.pages-wrapper {
+    display: flex;
+    margin-bottom: 15px;
+    gap: 15px;
+    flex-wrap: wrap;
+}

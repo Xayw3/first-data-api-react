@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate, useSearchParams } from 'react-router-dom';
 import Loader from '../../components/Loader/Loader';
 import { EpisodeResult } from '../../Model/EpisodeModel';
 import './episodes.scss';
@@ -11,12 +11,25 @@ const EpisodesPage = () => {
   const [findEpisode, setFindEpisode] = useState('');
   const [loading, setLoading] = useState<boolean>(false);
 
+  const [searchParams, setSearchParams] = useSearchParams();
+
   const navigate = useNavigate();
+
+  const episodeQuery = searchParams.get('name') || '';
+
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+    const form = e.target;
+
+    const getQuery = form.search.value;
+
+    setSearchParams({ name: getQuery });
+  };
 
   const getEpisodes = async () => {
     setLoading(true);
     try {
-      const allEpisodes = await axios.get(`https://rickandmortyapi.com/api/episode${findEpisode}`);
+      const allEpisodes = await axios.get('https://rickandmortyapi.com/api/episode');
       setEpisodes([...allEpisodes.data.results]);
     } catch (error) {
       navigate('/episodes');
@@ -32,9 +45,10 @@ const EpisodesPage = () => {
   return (
     <section className="episodes">
       <div className="container">
-        <form className="episodes__form" onSubmit={(el) => el.preventDefault()}>
+        <form className="episodes__form" onSubmit={handleSubmit}>
           <input
-            type="text"
+            type="search"
+            name="search"
             className="episodes__input"
             placeholder="Write episode"
             value={inputValue}
@@ -42,14 +56,14 @@ const EpisodesPage = () => {
           />
           <NavLink
             className="episodes__find"
-            onClick={() => setFindEpisode(`?name=${inputValue}`)}
+            onClick={() => { setSearchParams(inputValue); setInputValue(''); }}
             to={`?name=${inputValue}`}
           >
             Find
           </NavLink>
           <NavLink
             className="episodes__find"
-            onClick={() => setFindEpisode('')}
+            onClick={() => { setFindEpisode(''); setInputValue(''); }}
             to=""
           >
             Clear
@@ -57,8 +71,8 @@ const EpisodesPage = () => {
         </form>
         <ul className="episodes__list">
           {
-            episodes && episodes.map((el) => (
-              <li className="episodes__item" key={Math.random()}>
+            episodes?.filter((el) => el.name.toLowerCase().includes(episodeQuery)).map((el) => (
+              <li className="episodes__item" key={el.id}>
                 <div className="episodes__item-content">
                   <h2 className="episodes__title">
                     Rick and Morty

@@ -2,8 +2,9 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { NavLink, useNavigate, useParams } from 'react-router-dom';
 import Loader from '../../components/Loader/Loader';
-import { Character, CharacterResult } from '../../Model/CharactersModel';
+import { CharacterResult } from '../../Model/CharactersModel';
 import './character.scss';
+import styles from './CharacterPage.module.scss';
 
 const CharacterPage = () => {
   const { id } = useParams();
@@ -42,16 +43,16 @@ const CharacterPage = () => {
               <img className="character__img" src={character.image} alt={character.name} />
               <div className="character__info">
                 <div className="character__texts">
-                  <p className="character__text">
+                  <p className={styles.character__text}>
                     {`Name: ${character.name}`}
                   </p>
-                  <p className="character__text">
+                  <p className={styles.character__text}>
                     {`Species: ${character.species}`}
                   </p>
-                  <p className="character__text">
+                  <p className={styles.character__text}>
                     {`Gender: ${character.gender}`}
                   </p>
-                  <p className="character__text">
+                  <p className={styles.character__text}>
                     {`Status: ${character.status}`}
                   </p>
                 </div>
@@ -59,14 +60,14 @@ const CharacterPage = () => {
                   <NavLink
                     to={`/characters/${Number(currentCharacter - 1)}`}
                     onClick={() => setCurrentCharacter(currentCharacter && currentCharacter - 1)}
-                    className="character__btns-link"
+                    className={styles.link}
                   >
                     Prev
                   </NavLink>
                   <NavLink
                     to={`/characters/${Number(currentCharacter + 1)}`}
                     onClick={() => setCurrentCharacter(currentCharacter && currentCharacter + 1)}
-                    className="character__btns-link"
+                    className={styles.link}
                   >
                     Next
                   </NavLink>
